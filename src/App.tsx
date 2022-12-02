@@ -1,27 +1,15 @@
-import { CssBaseline, Box, Paper, Typography } from '@mui/material';
-import React from 'react';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { AddLanguage } from './components/AddLanguage';
+import { theme } from './styles/AppTheme';
 
 function App() {
   return (
-    <div>
-      <CssBaseline />
-      <Box
-        height="100vh"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        flexDirection="column"
-      >
-        <Paper
-          elevation={3}
-          sx={{ padding: "1rem", backgroundColor: "secondary.light" }}
-        >
-          <Typography color="primary.dark" variant="h1">
-            Starter App
-          </Typography>
-        </Paper>
-      </Box>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div>
+        <CssBaseline />
+        <AddLanguage />
+      </div>
+    </ThemeProvider>
   );
 }
 
