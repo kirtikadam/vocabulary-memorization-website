@@ -80,6 +80,14 @@ export const theme = createTheme({
             borderColor: '#e96e19',
             background: '#fff',
           },
+          '&.textList': {
+            border: 0,
+            background: '#fff',
+            width: '200px',
+            '& label': {
+              background: '#fff',
+            }
+          }
         }
       }
     },
@@ -129,6 +137,16 @@ export const theme = createTheme({
         }
 
       }
-    }
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          '& input': {
+            borderRadius: '4px',
+            border: '2px solid #e96e19'
+          }
+        }
+      }
+    },
   }
 });

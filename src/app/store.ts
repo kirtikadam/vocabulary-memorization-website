@@ -1,9 +1,11 @@
-import addLanguageReducer from '../components/addLanguageSlice'
+import addLanguageReducer from '../components/Add/addLanguageSlice';
+import translateReducer from '../components/Translate/translateSlice';
 import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
   reducer: {
     addLanguage: addLanguageReducer,
+    translate: translateReducer,
   },
 })
 

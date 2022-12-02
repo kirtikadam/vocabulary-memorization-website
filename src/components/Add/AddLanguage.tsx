@@ -1,11 +1,13 @@
 import { Box, Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Typography } from '@mui/material';
-import { theme } from '../styles/AppTheme';
+import { theme } from '../../styles/AppTheme';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
 import { AddLanguageModal } from './AddLanguageModal';
-import { useSelector } from 'react-redux';
-import { selectLanguage } from './addLanguageSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleNativeLanguage, selectLanguage } from './addLanguageSlice';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { LanguageType } from '../../types/Language';
+import { useNavigate } from 'react-router-dom';
 
 const mark = {
   display: 'inline-block',
@@ -17,15 +19,18 @@ const mark = {
 
 export const AddLanguage = () => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState('');
+  const [selectedLanguage, setSelectedLanguage] = useState<LanguageType>();
   const { language } = useSelector(selectLanguage);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleAddLanguage = () => {
     setShowModal(true);
   }
 
-  const handleSelected = (item: string) => {
-    setSelectedLanguage(item);
+  const handleSelected = (item: LanguageType) => {
+    setSelectedLanguage({ ...item, nativeLanguage: true });
+    dispatch(handleNativeLanguage({ ...item, nativeLanguage: true }));
   }
 
   return (
@@ -58,14 +63,14 @@ export const AddLanguage = () => {
             alignItems="center" gap="15px" mt={2} mb={2}>
             <List>
               {language.length ? (
-                language.map((item: string, index: number) => {
+                language.map((item: LanguageType, index: number) => {
                   return (
-                    <ListItem disablePadding key={index} className={selectedLanguage === item ? 'selected' : ''}>
+                    <ListItem disablePadding key={index} className={selectedLanguage?.name === item.name ? 'selected' : ''}>
                       <ListItemButton alignItems="center" onClick={() => handleSelected(item)}>
-                        <ListItemIcon className={selectedLanguage === item ? 'selected' : 'hidden'} sx={{ minWidth: 'auto' }}>
+                        <ListItemIcon className={selectedLanguage?.name === item.name ? 'selected' : 'hidden'} sx={{ minWidth: 'auto' }}>
                           <CheckCircleIcon sx={{ color: '#dedee0' }} />
                         </ListItemIcon>
-                        <ListItemText primary={item} />
+                        <ListItemText primary={item.name} />
                       </ListItemButton>
                     </ListItem>
                   )
@@ -86,7 +91,7 @@ export const AddLanguage = () => {
           </Box>
           <Button variant="contained" size="large" sx={{
             m: '10px 0', textTransform: 'capitalize',
-          }} disabled={!(language.length >= 2)}>
+          }} disabled={!(language.length >= 2)} onClick={() => navigate('/translate')}>
             Let's make list of vocabulary
           </Button>
         </Paper>

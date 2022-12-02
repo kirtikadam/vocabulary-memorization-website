@@ -31,7 +31,7 @@ export const AddLanguageModal = ({ showModal, handleClose }: IAddLanguageModal) 
 
   const handleClick = () => {
     if (value) {
-      dispatch(handleLanguage(value));
+      dispatch(handleLanguage({ name: value, nativeLanguage: false }));
       handleClose();
     } else {
       setError(true);

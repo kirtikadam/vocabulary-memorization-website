@@ -1,5 +1,7 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import { AddLanguage } from './components/AddLanguage';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { AddLanguage } from './components/Add/AddLanguage';
+import { TranslateLanguage } from './components/Translate/TranslateLanguage';
 import { theme } from './styles/AppTheme';
 
 function App() {
@@ -7,7 +9,12 @@ function App() {
     <ThemeProvider theme={theme}>
       <div>
         <CssBaseline />
-        <AddLanguage />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<AddLanguage />} />
+            <Route path="translate" element={<TranslateLanguage />} />
+          </Routes>
+        </BrowserRouter>
       </div>
     </ThemeProvider>
   );
