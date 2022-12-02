@@ -17,12 +17,17 @@ const mark = {
 
 export const AddLanguage = () => {
   const [showModal, setShowModal] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState('');
   const { language } = useSelector(selectLanguage);
-  console.log("language = ", language)
 
   const handleAddLanguage = () => {
     setShowModal(true);
   }
+
+  const handleSelected = (item: string) => {
+    setSelectedLanguage(item);
+  }
+
   return (
     <div>
       <Box
@@ -55,11 +60,10 @@ export const AddLanguage = () => {
               {language.length ? (
                 language.map((item: string, index: number) => {
                   return (
-                    <ListItem disablePadding key={index}>
-                      <ListItemButton alignItems="center">
-                        {/* className="hidden" */}
-                        <ListItemIcon sx={{ pr: '10px', minWidth: 'auto' }}>
-                          <CheckCircleIcon color="primary" />
+                    <ListItem disablePadding key={index} className={selectedLanguage === item ? 'selected' : ''}>
+                      <ListItemButton alignItems="center" onClick={() => handleSelected(item)}>
+                        <ListItemIcon className={selectedLanguage === item ? 'selected' : 'hidden'} sx={{ minWidth: 'auto' }}>
+                          <CheckCircleIcon sx={{ color: '#dedee0' }} />
                         </ListItemIcon>
                         <ListItemText primary={item} />
                       </ListItemButton>

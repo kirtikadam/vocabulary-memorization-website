@@ -76,8 +76,9 @@ export const theme = createTheme({
           borderRadius: '4px',
           padding: 0,
           minWidth: '100px',
-          '&:hover': {
+          '&.selected': {
             borderColor: '#e96e19',
+            background: '#fff',
           },
         }
       }
@@ -92,12 +93,14 @@ export const theme = createTheme({
             background: '#fff',
             '& .hidden': {
               display: 'flex',
-              zIndex: 9
             },
           },
           '& .hidden': {
             display: 'none',
           },
+          '& .selected svg': {
+            fill: '#e96e19'
+          }
         }
       }
     },
@@ -114,6 +117,14 @@ export const theme = createTheme({
           '&.hidden': {
             position: 'absolute',
             left: '-13px',
+            borderRadius: '16px',
+            backgroundColor: '#fff',
+          },
+          '&.selected': {
+            position: 'absolute',
+            left: '-13px',
+            borderRadius: '16px',
+            backgroundColor: '#fff',
           },
         }
 

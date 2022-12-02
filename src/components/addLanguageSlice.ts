@@ -18,7 +18,6 @@ export const addLanguageSlice = createSlice({
   initialState,
   reducers: {
     handleLanguage: (state, action: PayloadAction<string>) => {
-      console.log(action)
       state.language.push(action.payload)
     }
   },
